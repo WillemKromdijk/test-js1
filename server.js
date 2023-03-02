@@ -2,10 +2,19 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 3001;
 
+app.use((req, res, next) => {
+  console.log('Time:', new Date().toISOString())
+
+  // res.header('Access-Control-Allow-Origin', '*');
+  // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next()
+})
+
 app.get("/", (req, res) => res.type('html').send(html));
 
 app.get("/data", (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
+  console.log("data called")
+  // res.header("Access-Control-Allow-Origin", "http://localhost:4200/");
   res.status(200).send({result: "baas"})
 })
 
